@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *quantityButton;
 @property (weak, nonatomic) IBOutlet V8HorizontalPickerView *quantityPicker;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *quantityPickerTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleLabelHeightConstraint;
+
 
 - (instancetype)initWithBeer:(Beer *)beer;
 

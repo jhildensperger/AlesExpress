@@ -60,6 +60,7 @@
     }
 }
 
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -75,6 +76,8 @@
                     } completion:^(BOOL finished) {
                         if (finished) {
                             [UIView animateWithDuration:.35 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                                [UIApplication sharedApplication].statusBarHidden = NO;
+                                self.logoImageView.alpha = 1;
                                 self.collectionView.alpha = 1;
                                 self.pageLabel.alpha = 1;
                                 self.refineButton.alpha = 1;

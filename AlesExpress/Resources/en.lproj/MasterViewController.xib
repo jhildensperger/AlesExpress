@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4514" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MasterViewController">
             <connections>
                 <outlet property="backgroundImageView" destination="mNC-2O-bfc" id="nnT-x4-Yy4"/>
                 <outlet property="collectionView" destination="H4D-3w-hnX" id="m5N-oj-r7s"/>
+                <outlet property="logoImageView" destination="fTZ-42-ZT3" id="DCa-UI-iWS"/>
                 <outlet property="menuButton" destination="8p8-Vt-Gui" id="iPa-Fj-mqf"/>
                 <outlet property="pageLabel" destination="bW1-cZ-xDz" id="mze-5w-Ls4"/>
                 <outlet property="refineButton" destination="t0S-Mu-hpC" id="NE8-OI-xOk"/>
@@ -50,7 +51,7 @@
                         <outlet property="delegate" destination="-1" id="HjL-th-GV9"/>
                     </connections>
                 </collectionView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ales.png" translatesAutoresizingMaskIntoConstraints="NO" id="fTZ-42-ZT3">
+                <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ales.png" translatesAutoresizingMaskIntoConstraints="NO" id="fTZ-42-ZT3">
                     <rect key="frame" x="120" y="20" width="80" height="40"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <constraints>

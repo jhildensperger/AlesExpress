@@ -7,6 +7,7 @@
 @property (nonatomic, assign) BOOL loggingInToOrder;
 @property (nonatomic) Beer *beer;
 @property (nonatomic) NSArray *quantityTitles;
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 @end
 
@@ -17,7 +18,7 @@
 - (instancetype)initWithBeer:(Beer *)beer {
     if (self = [super initWithNibName:NSStringFromClass(self.class) bundle:nil]) {
         self.beer = beer;
-        self.quantityTitles = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"More"];
+        self.quantityTitles = @[@"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10"];
     }
     return self;
 }
@@ -28,7 +29,13 @@
     [self configureView];
     
     self.backgroundImageView.image = [[UIImage imageNamed:@"beer_glass"] applyDarkEffect];
+    [self setupTitleLabel];
+}
+
+- (void)setupTitleLabel {
     self.titleLabel.text = self.beer.name;
+    CGSize titleLabelSize = [self.titleLabel sizeThatFits:CGSizeMake(212, 1000)];
+    self.titleLabelHeightConstraint.constant = titleLabelSize.height;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -87,18 +94,19 @@
 }
 
 - (IBAction)didTapAddToCartButton:(id)sender {
-
+    self.cartCount += self.quantityButton.titleLabel.text.integerValue;
 }
 
 - (IBAction)didTapQuantityButton:(id)sender {
-    [self setQuantityPickerVisible:YES];
+    [self setQuantityPickerVisible:!self.quantityPicker.isHidden];
 }
 
 - (void)setQuantityPickerVisible:(BOOL)isVisible {
+    self.quantityPicker.hidden = !isVisible;
     if (isVisible) {
-        self.quantityPickerTopConstraint.constant = -44;
-    } else {
         self.quantityPickerTopConstraint.constant = 0;
+    } else {
+        self.quantityPickerTopConstraint.constant = -44;
     }
     
     [UIView animateWithDuration:0.25
@@ -106,7 +114,18 @@
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
                          [self.view layoutIfNeeded];
-                     } completion:nil];
+                     } completion:^(BOOL finished) {
+                         if (finished) {
+                             self.quantityPicker.hidden = !isVisible;
+                         }
+                     }];
+    
+    self.selectedIndex = self.quantityPicker.currentSelectedIndex;
+}
+
+- (void)setSelectedIndex:(NSInteger)selectedIndex {
+    _selectedIndex = selectedIndex;
+    [self.quantityButton setTitle:self.quantityTitles[self.selectedIndex] forState:UIControlStateNormal];
 }
 
 
@@ -172,10 +191,7 @@
 
 - (void)horizontalPickerView:(V8HorizontalPickerView *)picker didSelectElementAtIndex:(NSInteger)idx {
     [self setQuantityPickerVisible:NO];
-    if ([self.quantityTitles[idx] integerValue]) {
-        self.cartCount = [self.quantityTitles[idx] integerValue];
-        [self.quantityButton setTitle:self.quantityTitles[idx] forState:UIControlStateNormal];
-    }
+    self.selectedIndex = idx;
 }
 
 - (NSString *)horizontalPickerView:(V8HorizontalPickerView *)picker titleForElementAtIndex:(NSInteger)index {

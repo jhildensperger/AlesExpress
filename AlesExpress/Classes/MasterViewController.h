@@ -9,10 +9,10 @@
 
 @property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *logoImageView;
 @property (nonatomic, weak) IBOutlet UILabel *pageLabel;
 @property (nonatomic, weak) IBOutlet UIButton *refineButton;
 @property (nonatomic, weak) IBOutlet UIButton *searchButton;
-@property (nonatomic, weak) IBOutlet UIButton *cartButton;
 @property (nonatomic, weak) IBOutlet UIButton *menuButton;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 

@@ -33,6 +33,10 @@
     [self.cartButton setImage:cartImage forState:UIControlStateNormal];
 }
 
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (void)setShowsCart:(BOOL)showsCart {
     if (showsCart) {
         [self.view addSubview:self.cartButton];
