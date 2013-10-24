@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController">
+            <connections>
+                <outlet property="view" destination="8PB-IF-E1X" id="CCN-2B-7im"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="yIR-n4-EZw">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" scrollEnabled="NO" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="8PB-IF-E1X">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <view key="tableHeaderView" contentMode="scaleToFill" id="cnm-WL-SkO" userLabel="header view">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="tr_logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="crN-qe-Kfb">
+                                <rect key="frame" x="80" y="0.0" width="160" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="Ren-ly-qcl"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="crN-qe-Kfb" firstAttribute="top" secondItem="cnm-WL-SkO" secondAttribute="top" id="ECd-h6-V53"/>
+                            <constraint firstAttribute="bottom" secondItem="crN-qe-Kfb" secondAttribute="bottom" id="g2p-bV-vit"/>
+                            <constraint firstItem="crN-qe-Kfb" firstAttribute="centerX" secondItem="cnm-WL-SkO" secondAttribute="centerX" id="nbc-qr-YsW"/>
+                        </constraints>
+                    </view>
+                    <view key="tableFooterView" contentMode="scaleToFill" id="m83-eo-AWW">
+                        <rect key="frame" x="0.0" y="548" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Log in with your TaskRabbit account information to place a DeliverNow order." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5DW-Um-6Wl">
+                                <rect key="frame" x="5" y="-11" width="305" height="62"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="62" id="uwD-4Z-VbF"/>
+                                    <constraint firstAttribute="width" constant="305" id="zz8-It-qCd"/>
+                                </constraints>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5DW-Um-6Wl" firstAttribute="top" secondItem="m83-eo-AWW" secondAttribute="top" constant="-11" id="OAe-Rh-7Gf"/>
+                            <constraint firstItem="5DW-Um-6Wl" firstAttribute="leading" secondItem="m83-eo-AWW" secondAttribute="leading" constant="5" id="a98-uN-h6t"/>
+                        </constraints>
+                    </view>
+                    <sections/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="UvQ-W7-b2K"/>
+                        <outlet property="delegate" destination="-1" id="wSK-2Z-zro"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="tr_logo.png" width="526" height="155"/>
+    </resources>
+</document>

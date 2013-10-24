@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
+            <connections>
+                <outlet property="imageView" destination="JUN-TH-g8X" id="eXc-KK-YNB"/>
+                <outlet property="nameLabel" destination="u6z-Kz-Isf" id="Kws-rs-tHa"/>
+                <outlet property="priceLabel" destination="CFo-1u-fLA" id="LU8-c1-kuW"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="BeerCell" id="ks2-KP-0vU" customClass="CollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="270" height="270"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="270" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="seamlesspaper3.png" translatesAutoresizingMaskIntoConstraints="NO" id="ktt-HN-xYk">
+                        <rect key="frame" x="0.0" y="0.0" width="270" height="270"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="ales_logo2.png" translatesAutoresizingMaskIntoConstraints="NO" id="JUN-TH-g8X">
+                        <rect key="frame" x="48" y="47" width="175" height="175"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="175" id="G6C-Ib-vsJ"/>
+                            <constraint firstAttribute="width" constant="175" id="v4y-Jq-1Up"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="u6z-Kz-Isf">
+                        <rect key="frame" x="20" y="18" width="231" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="Qx7-6X-m77"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" red="0.41730576260000002" green="0.3624630069" blue="0.27504243449999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" red="0.98419581420000002" green="0.85874880819999999" blue="0.66432435369999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFo-1u-fLA">
+                        <rect key="frame" x="85" y="234" width="100" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="TPB-3J-Zca"/>
+                            <constraint firstAttribute="height" constant="21" id="tVV-Fa-Vf8"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <color key="textColor" red="0.41730576260000002" green="0.3624630069" blue="0.27504243449999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" red="0.98419581420000002" green="0.85874880819999999" blue="0.66432435369999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="ktt-HN-xYk" firstAttribute="leading" secondItem="ks2-KP-0vU" secondAttribute="leading" id="1Cg-uG-cvF"/>
+                <constraint firstAttribute="bottom" secondItem="CFo-1u-fLA" secondAttribute="bottom" constant="15" id="79u-sz-HlN"/>
+                <constraint firstItem="CFo-1u-fLA" firstAttribute="centerX" secondItem="JUN-TH-g8X" secondAttribute="centerX" id="AdX-pm-c3f"/>
+                <constraint firstItem="u6z-Kz-Isf" firstAttribute="top" secondItem="ks2-KP-0vU" secondAttribute="top" constant="18" id="C75-Bq-RMB"/>
+                <constraint firstItem="JUN-TH-g8X" firstAttribute="top" secondItem="u6z-Kz-Isf" secondAttribute="bottom" constant="8" symbolic="YES" id="FWN-JE-JGi"/>
+                <constraint firstItem="CFo-1u-fLA" firstAttribute="centerX" secondItem="ktt-HN-xYk" secondAttribute="centerX" id="R3o-Tf-dFi"/>
+                <constraint firstItem="ktt-HN-xYk" firstAttribute="bottom" secondItem="ks2-KP-0vU" secondAttribute="bottom" id="Yjz-oV-ozp"/>
+                <constraint firstItem="u6z-Kz-Isf" firstAttribute="leading" secondItem="ks2-KP-0vU" secondAttribute="leading" constant="20" id="hK8-l3-hL9"/>
+                <constraint firstItem="JUN-TH-g8X" firstAttribute="centerX" secondItem="u6z-Kz-Isf" secondAttribute="centerX" id="oIb-mF-exh"/>
+                <constraint firstItem="ktt-HN-xYk" firstAttribute="top" secondItem="ks2-KP-0vU" secondAttribute="top" id="wao-Za-d7E"/>
+                <constraint firstItem="CFo-1u-fLA" firstAttribute="centerX" secondItem="ks2-KP-0vU" secondAttribute="centerX" id="zoJ-Rj-cM1"/>
+            </constraints>
+            <connections>
+                <outlet property="imageView" destination="JUN-TH-g8X" id="yKw-Ue-hnA"/>
+                <outlet property="nameLabel" destination="u6z-Kz-Isf" id="Xy3-NW-Ukt"/>
+                <outlet property="priceLabel" destination="CFo-1u-fLA" id="mhm-2b-OWX"/>
+            </connections>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ales_logo2.png" width="200" height="100"/>
+        <image name="seamlesspaper3.png" width="1200" height="1200"/>
+    </resources>
+</document>
