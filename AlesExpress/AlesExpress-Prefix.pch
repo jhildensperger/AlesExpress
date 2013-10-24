@@ -18,4 +18,5 @@
     #import "BaseViewController.h"
     #import "UIFont+Additions.h"
     #import "UIButton+Additions.h"
+    #import "UIImage+ImageEffects.h"
 #endif

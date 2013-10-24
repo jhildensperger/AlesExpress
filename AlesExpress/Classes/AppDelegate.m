@@ -10,13 +10,13 @@
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
     // Override point for customization after application launch.
-    MasterViewController *masterViewController = [[MasterViewController alloc] init];
-    masterViewController.managedObjectContext = self.managedObjectContext;
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
-    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    MasterViewController *masterViewController = [[MasterViewController alloc] init];
+    masterViewController.managedObjectContext = self.managedObjectContext;
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
     
     self.window.rootViewController = navigationController;
     
@@ -55,7 +55,7 @@
     [[UIButton appearanceWhenContainedIn:[UIActionSheet class], nil] setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
 
     [[UINavigationBar appearance] setTintColor:[UIColor colorWithWhite:0.05 alpha:1.0]];
-
+    [[UINavigationBar appearance] setBackgroundColor:[UIColor colorWithWhite:.3 alpha:1.0]];
 }
 
 - (void)saveContext {

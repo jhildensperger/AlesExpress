@@ -9,12 +9,11 @@
 
 @property (nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic) UIImageView *bannerImageView;
-@property (nonatomic) UIImageView *logoImageView;
-@property (nonatomic) UISearchBar *searchBar;
-@property (nonatomic) UILabel *pageLabel;
-@property (nonatomic) UIButton *orderButton;
-@property (nonatomic) UIActionSheet *sortActionSheet;
+
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, weak) IBOutlet UILabel *pageLabel;
+@property (nonatomic, weak) IBOutlet UIButton *orderButton;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 
 @end

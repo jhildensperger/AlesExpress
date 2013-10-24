@@ -5,8 +5,7 @@
 @interface DetailViewController ()
 
 @property (nonatomic, assign) BOOL loggingInToOrder;
-
-- (void)configureView;
+@property (nonatomic) Beer *beer;
 
 @end
 
@@ -14,44 +13,11 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
+- (instancetype)initWithBeer:(Beer *)beer {
+    if (self = [super initWithNibName:NSStringFromClass(self.class) bundle:nil]) {
+        self.beer = beer;
     }
-}
-
-- (void)configureView {
-    self.detailDescriptionTextView.font = [UIFont lightFontOfSize:16];
-    self.detailABVLabel.font = [UIFont normalFontOfSize:18];
-    self.detailNameLabel.font = [UIFont normalFontOfSize:18];
-    self.detailPriceLabel.font = [UIFont normalFontOfSize:18];
-    self.detailServingLabel.font = [UIFont normalFontOfSize:18];
-    
-    if (self.detailItem) {
-        self.orderButton.layer.cornerRadius = 3;
-        self.orderButton.layer.borderColor = [UIColor darkGrayColor].CGColor;
-        self.orderButton.layer.borderWidth = 1;
-        
-        self.detailNameLabel.text = [[self.detailItem valueForKey:@"name"] description];
-        self.detailDescriptionTextView.text = [[self.detailItem valueForKey:@"descriptionText"] description];
-        self.detailServingLabel.text = [[self.detailItem valueForKey:@"serving"] description];
-        
-        if (![self.detailItem valueForKey:@"abv"]) self.detailABVLabel.text = @"Unknown ABV";
-        else self.detailABVLabel.text = [NSString stringWithFormat:@"%@ %@",[[self.detailItem valueForKey:@"abv"] description], @"ABV"];
-        
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
-        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-        self.detailPriceLabel.text = [formatter stringFromNumber:[self.detailItem valueForKey:@"price"]];
-        
-        if ([[self.detailItem valueForKey:@"imageUrl"] description])
-        {
-            NSURL *url = [NSURL URLWithString:[[self.detailItem valueForKey:@"imageUrl"] description]];
-            [self.detailImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"ales_logo2"]];
-        }
-    }
+    return self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -62,10 +28,16 @@
     }
 }
 
+- (NSString *)title {
+    return self.beer.name;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self configureView];
+    
+    self.backgroundImageView.image = [[UIImage imageNamed:@"beer_glass"] applyDarkEffect];
 }
 
 #pragma mark - loginViewControllerDelegate methods
@@ -94,7 +66,7 @@
     UINavigationController *navController = (UINavigationController *)[self.storyboard instantiateViewControllerWithIdentifier:@"orderVC"];
     OrderViewController *orderController = (OrderViewController *)navController.topViewController;
 
-    orderController.beerToOrder = (Beer *)self.detailItem;
+    orderController.beerToOrder = self.beer;
     orderController.delegate = self;
 
     [self presentViewController:navController
@@ -110,9 +82,7 @@
 
     loginController.delegate = self;
 
-    [self presentViewController:navController
-                       animated:YES
-                     completion:^{
+    [self presentViewController:navController animated:YES completion:^{
                          self.loggingInToOrder = YES;
                      }];
 }
@@ -125,6 +95,32 @@
         [self presentOrderController];
     } else {
         [self presentLoginController];
+    }
+}
+
+- (void)configureView {
+    self.detailDescriptionTextView.font = [UIFont normalFontOfSize:14];
+    self.detailABVLabel.font = [UIFont normalFontOfSize:18];
+    self.detailPriceLabel.font = [UIFont normalFontOfSize:30];
+    self.detailServingLabel.font = [UIFont normalFontOfSize:18];
+    
+    self.orderButton.titleLabel.font = [UIFont normalFontOfSize:20.0];
+    self.orderButton.layer.cornerRadius = 3;
+    self.orderButton.layer.borderColor = [UIColor colorWithWhite:.9 alpha:1].CGColor;
+    self.orderButton.layer.borderWidth = 1;
+    
+    self.detailDescriptionTextView.text = self.beer.descriptionText;
+    self.detailServingLabel.text = self.beer.serving;
+    
+    self.detailABVLabel.text = self.beer.abv ? [self.beer.abv.stringValue stringByAppendingString:@"ABV"] : @"ABV Not Available";
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    self.detailPriceLabel.text = [formatter stringFromNumber:self.beer.price];
+    
+    if (self.beer.imageUrl) {
+        NSURL *url = [NSURL URLWithString:self.beer.imageUrl];
+        [self.detailImageView setImageWithURL:url placeholderImage:[UIImage imageNamed:@"ales_logo2"]];
     }
 }
 

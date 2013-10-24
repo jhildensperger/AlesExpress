@@ -10,6 +10,7 @@
 @property (nonatomic, assign) BOOL sortAscending;
 @property (nonatomic, assign) BOOL loggingInToOrder;
 @property (nonatomic, assign) int selectedBeerIndex;
+@property (nonatomic) NSArray *sortingTitles;
 
 - (void)configureCell:(CollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 
@@ -39,18 +40,33 @@
     if (self.loggingInToOrder) {
         [self presentOrderController];
     }
+    
+    [UIView transitionWithView:self.backgroundImageView
+                      duration:.25
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                    self.backgroundImageView.image = [[UIImage imageNamed:@"beer_glass"] applyDarkEffect];
+                    } completion:^(BOOL finished) {
+                        if (finished) {
+                            [UIView animateWithDuration:.35 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+                                self.collectionView.alpha = 1;
+                                self.pageLabel.alpha = 1;
+                                self.orderButton.alpha = 1;
+                            } completion:nil];
+                        }
+                    }];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"BeerCell"];
+    
+    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass(CollectionViewCell.class) bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"BeerCell"];
     [self filter:@""];
+    
+    [self changeSortSheetWithIndex:0];
 
-    [self setupBannerImageView];
-    [self setupSortSheet];
-    [self setupSearchBar];
-    [self setupPageLabel];
-    [self setupOrderButton];
+    [self setupView];
     
     self.extendedLayoutIncludesOpaqueBars = NO;
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -78,22 +94,19 @@
     }
 }
 
-#pragma mark - Table View
+#pragma mark - UICollectionViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     int rowCount = self.filteredData.count;
     if (rowCount == 0) self.pageLabel.text = @"No Results";
     return rowCount;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     [self setPageLabelForCollectionView:collectionView indexPath:indexPath];
     
     CollectionViewCell *cell = (CollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"BeerCell" forIndexPath:indexPath];
@@ -101,19 +114,17 @@
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [[self.collectionView indexPathsForSelectedItems] lastObject];
-        NSManagedObject *object = [self.filteredData objectAtIndex:indexPath.row];
-        [[segue destinationViewController] setDetailItem:object];
-    }
+#pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    DetailViewController *detailViewController = [[DetailViewController alloc] initWithBeer:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    [self.navigationController pushViewController:detailViewController animated:YES];
+    
 }
 
 #pragma mark - Fetched results controller
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
+- (NSFetchedResultsController *)fetchedResultsController {
     if (_fetchedResultsController != nil) {
         return _fetchedResultsController;
     }
@@ -150,8 +161,8 @@
 }    
 
 - (void)configureCell:(CollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    NSManagedObject *object = [self.filteredData objectAtIndex:indexPath.row];
-    [cell setBeerInfo:(Beer *)object];
+    Beer *beer = [self.filteredData objectAtIndex:indexPath.row];
+    [cell setBeerInfo:beer];
 }
 
 #pragma mark UISearchBarDelegate Methods
@@ -170,8 +181,7 @@
 
 #pragma mark UIActionSheetDelegate Methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     NSString *selectedKey;
     switch (buttonIndex) {
         case 0: selectedKey = @"name";
@@ -184,12 +194,10 @@
             break;
     }
     
-    if (buttonIndex != 3)
-    {
-        if ([self.sortByKey isEqualToString:selectedKey]) self.sortAscending = !self.sortAscending;
-        
-        else
-        {
+    if (buttonIndex != 3) {
+        if ([self.sortByKey isEqualToString:selectedKey]) {
+            self.sortAscending = !self.sortAscending;
+        }else {
             self.sortByKey = selectedKey;
             self.sortAscending = YES;
         }
@@ -236,32 +244,27 @@
 
 #pragma mark - loginViewControllerDelegate methods
 
-- (void)loginViewControllerDidCancel:(LoginViewController *)loginViewController
-{
+- (void)loginViewControllerDidCancel:(LoginViewController *)loginViewController {
     self.loggingInToOrder = NO;
 }
 
-- (void)loginViewControllerDidLogin:(LoginViewController *)loginViewController
-{
+- (void)loginViewControllerDidLogin:(LoginViewController *)loginViewController {
 
 }
 
 #pragma mark - orderViewControllerDelegate methods
 
-- (void)orderViewControllerDidCancel:(OrderViewController *)loginViewController
-{
+- (void)orderViewControllerDidCancel:(OrderViewController *)loginViewController {
     self.loggingInToOrder = NO;
 }
 
-- (void)orderViewControllerDidPostTask:(OrderViewController *)loginViewController
-{
+- (void)orderViewControllerDidPostTask:(OrderViewController *)loginViewController {
 
 }
 
 #pragma mark - set page label
 
-- (void)setPageLabelForCollectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath
-{
+- (void)setPageLabelForCollectionView:(UICollectionView *)collectionView indexPath:(NSIndexPath *)indexPath {
     NSString *indexString;
     NSString *totalString = [NSString stringWithFormat:@"%d",[collectionView numberOfItemsInSection:0]];
     
@@ -280,84 +283,22 @@
 
 #pragma mark - UIControl setup methods
 
-- (void)setupBannerImageView {
-    self.bannerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(123.0, 4.0, 75.0, 38.0)];
-    [self.bannerImageView setImage:[UIImage imageNamed:@"ales_logo2"]];
-    
-    [self.view addSubview:self.bannerImageView];
+- (void)changeSortSheetWithIndex:(NSInteger)buttonIndex {
+    NSString *nameTitle = [@"Name  " stringByAppendingString:(buttonIndex == 0 && self.sortAscending) ? @"▼" : @"▲"];
+    NSString *priceTitle = [@"Price  " stringByAppendingString:(buttonIndex == 0 && self.sortAscending) ? @"▼" : @"▲"];
+    NSString *abvTitle = [@"ABV  " stringByAppendingString:(buttonIndex == 0 && self.sortAscending) ? @"▼" : @"▲"];
+   
+    self.sortingTitles = @[nameTitle, priceTitle, abvTitle];
 }
 
-- (void)changeSortSheetWithIndex:(NSInteger)buttonIndex
-{
-    NSString *nameTitle = @"Name  ▲";
-    NSString *priceTitle = @"Price  ▲";
-    NSString *abvTitle = @"ABV  ▲";
-    switch (buttonIndex) {
-        case 0: if (self.sortAscending) nameTitle = @"Name  ▼";
-            break;
-        case 1: if (self.sortAscending) priceTitle = @"Price  ▼";
-            break;
-        case 2: if (self.sortAscending) abvTitle = @"ABV  ▼";
-            break;
-        default: 
-            break;
-    }
-    
-    self.sortActionSheet = nil;
-    self.sortActionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:nameTitle, priceTitle, abvTitle, nil];
-
-}
-
-- (void)setupSortSheet {
+- (void)setupView {
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:self action:@selector(didTapSortButton)];
-    self.sortActionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                       delegate:self
-                                              cancelButtonTitle:@"Cancel"
-                                         destructiveButtonTitle:nil
-                                              otherButtonTitles:@"Name  ▼", @"Price  ▲", @"ABV  ▲", nil];
-    
-
-    self.sortActionSheet.actionSheetStyle = UIActionSheetStyleBlackTranslucent;
-}
-
-- (void)setupSearchBar {
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(didTapSearchButton)];
-    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, -44.0, 320, 44)];
-    self.searchBar.tintColor = self.navigationController.navigationBar.tintColor;
-    self.searchBar.showsCancelButton = YES;
-    self.searchBar.delegate = self;
-    self.searchBar.placeholder = @"Search by Name";
-
-    [self.view addSubview:self.searchBar];
-}
-
-- (void)setupPageLabel {
-    self.pageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0.0, 50.0, self.view.frame.size.width, 20.0)];
-    self.pageLabel.backgroundColor = [UIColor clearColor];
-    self.pageLabel.textAlignment = NSTextAlignmentCenter;
     self.pageLabel.font = [UIFont normalFontOfSize:14];
-    self.pageLabel.textColor = [UIColor darkGrayColor];
-    [self.view addSubview:self.pageLabel];
-}
-
-- (void)setupOrderButton {
-    self.orderButton = [[UIButton alloc] initWithFrame:CGRectMake(50.0, 370.0, 220.0, 37.0)];
-    [self.orderButton setTitle:@"Place Order" forState:UIControlStateNormal];
-    [self.orderButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-    [self.orderButton setTitleColor:[[UIColor darkGrayColor] colorWithAlphaComponent:.5] forState:UIControlStateHighlighted];
     self.orderButton.titleLabel.font = [UIFont normalFontOfSize:20.0];
-
-    self.orderButton.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    self.orderButton.layer.borderColor = [UIColor colorWithWhite:.9 alpha:1].CGColor;
     self.orderButton.layer.borderWidth = 1;
     self.orderButton.layer.cornerRadius = 5;
-
-    [self.orderButton addTarget:self action:@selector(orderButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-
-    [self.view addSubview:self.orderButton];
 }
 
 #pragma mark - button methods
@@ -388,7 +329,7 @@
                      }];
 }
 
-- (void)orderButtonTapped:(id)sender {
+- (IBAction)orderButtonTapped:(id)sender {
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kTaskRabbitAccessTokenKey];;
 
     if (accessToken) {
@@ -425,7 +366,12 @@
 }
 
 - (void)didTapSortButton {
-    [self.sortActionSheet showInView:self.view];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sort Beers" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
+    [self.sortingTitles enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
+        [actionSheet addButtonWithTitle:title];
+    }];
+    
+    [actionSheet showInView:self.view];
 }
 
 @end

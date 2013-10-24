@@ -7,7 +7,7 @@
 }
 
 + (UIFont *)lightFontOfSize:(CGFloat)fontSize {
-    return [UIFont fontWithName:@"HeroLight" size:fontSize];
+    return [UIFont fontWithName:@"Hero-Light" size:fontSize];
 }
 
 @end

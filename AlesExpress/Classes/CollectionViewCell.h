@@ -6,7 +6,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *priceLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UIImageView *beerImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 
 - (void)setBeerInfo:(Beer *)beer;
 

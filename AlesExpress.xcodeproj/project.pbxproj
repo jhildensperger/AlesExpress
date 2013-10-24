@@ -57,14 +57,16 @@
 		0D46C4091814B778007B6B7F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D46C4021814B778007B6B7F /* main.m */; };
 		0D46C40A1814B778007B6B7F /* smallSet.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0D46C4031814B778007B6B7F /* smallSet.sqlite */; };
 		0D46C4111814BB4A007B6B7F /* UIFont+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D46C4101814BB4A007B6B7F /* UIFont+Additions.m */; };
-		0D46C4141814D413007B6B7F /* HeroLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D46C4121814D413007B6B7F /* HeroLight.otf */; };
+		0D46C4141814D413007B6B7F /* Hero-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D46C4121814D413007B6B7F /* Hero-Light.otf */; };
 		0D46C4151814D413007B6B7F /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D46C4131814D413007B6B7F /* Hero.otf */; };
 		0D9061631816273700C7FE30 /* ales.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9061621816273700C7FE30 /* ales.png */; };
 		0D93BF2B160FE3AB00CA9C29 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D93BF2A160FE3AB00CA9C29 /* CoreText.framework */; };
 		0D98164818179BB000E098F6 /* AlesExpress.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D46C3FF1814B778007B6B7F /* AlesExpress.xcdatamodeld */; };
 		0D98164918179BB300E098F6 /* CoreDataGenerator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0D46C4011814B778007B6B7F /* CoreDataGenerator.xcdatamodeld */; };
+		0DB6F3661818F4BA00CB2522 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB6F3651818F4BA00CB2522 /* UIImage+ImageEffects.m */; };
+		0DB6F36A1818FBF400CB2522 /* beer_glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB6F3691818FBF400CB2522 /* beer_glass.png */; };
+		0DB6F36C181906F400CB2522 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB6F36B181906F400CB2522 /* Default-568h@2x.png */; };
 		0DF651B418162ABC004C593E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DF651B018162ABC004C593E /* InfoPlist.strings */; };
-		0DF651B518162ABC004C593E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0DF651B218162ABC004C593E /* MainStoryboard.storyboard */; };
 		0DF651B818162AD9004C593E /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF651B618162AD9004C593E /* MasterViewController.xib */; };
 		0DF651BB18162AF6004C593E /* OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF651B918162AF6004C593E /* OrderViewController.xib */; };
 		0DF651BE18162B08004C593E /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DF651BC18162B08004C593E /* DetailViewController.xib */; };
@@ -148,13 +150,16 @@
 		0D46C4031814B778007B6B7F /* smallSet.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = smallSet.sqlite; sourceTree = "<group>"; };
 		0D46C40F1814BB4A007B6B7F /* UIFont+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+Additions.h"; sourceTree = "<group>"; };
 		0D46C4101814BB4A007B6B7F /* UIFont+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Additions.m"; sourceTree = "<group>"; };
-		0D46C4121814D413007B6B7F /* HeroLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HeroLight.otf; sourceTree = "<group>"; };
+		0D46C4121814D413007B6B7F /* Hero-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero-Light.otf"; sourceTree = "<group>"; };
 		0D46C4131814D413007B6B7F /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
 		0D9061621816273700C7FE30 /* ales.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ales.png; sourceTree = "<group>"; };
 		0D93BF2A160FE3AB00CA9C29 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0D98164A1817A0D300E098F6 /* AlesExpress.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = AlesExpress.sqlite; sourceTree = "<group>"; };
+		0DB6F3641818F4BA00CB2522 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		0DB6F3651818F4BA00CB2522 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		0DB6F3691818FBF400CB2522 /* beer_glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beer_glass.png; sourceTree = "<group>"; };
+		0DB6F36B181906F400CB2522 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0DF651B118162ABC004C593E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
-		0DF651B318162ABC004C593E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		0DF651B718162AD9004C593E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = MasterViewController.xib; sourceTree = "<group>"; };
 		0DF651BA18162AF6004C593E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = OrderViewController.xib; sourceTree = "<group>"; };
 		0DF651BD18162B08004C593E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = DetailViewController.xib; sourceTree = "<group>"; };
@@ -262,7 +267,7 @@
 			children = (
 				0DF651AF18162ABC004C593E /* en.lproj */,
 				0D46C3841814AD23007B6B7F /* images */,
-				0D46C4121814D413007B6B7F /* HeroLight.otf */,
+				0D46C4121814D413007B6B7F /* Hero-Light.otf */,
 				0D46C4131814D413007B6B7F /* Hero.otf */,
 			);
 			path = Resources;
@@ -280,10 +285,12 @@
 				0D46C38F1814AD23007B6B7F /* green-btn.png */,
 				0D46C3901814AD23007B6B7F /* green-btn@2x.png */,
 				0D46C3911814AD23007B6B7F /* Icon-Small.png */,
+				0DB6F36B181906F400CB2522 /* Default-568h@2x.png */,
 				0D46C3921814AD23007B6B7F /* Icon-Small@2x.png */,
 				0D46C3931814AD23007B6B7F /* Icon.png */,
 				0D46C3941814AD23007B6B7F /* Icon@2x.png */,
 				0D46C3951814AD23007B6B7F /* loggedout-header-logo.png */,
+				0DB6F3691818FBF400CB2522 /* beer_glass.png */,
 				0D46C3961814AD23007B6B7F /* paper.png */,
 				0D46C3971814AD23007B6B7F /* ribbon.png */,
 				0D46C3981814AD23007B6B7F /* seamlesspaper3.png */,
@@ -377,6 +384,8 @@
 		0D46C40E1814BB4A007B6B7F /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				0DB6F3641818F4BA00CB2522 /* UIImage+ImageEffects.h */,
+				0DB6F3651818F4BA00CB2522 /* UIImage+ImageEffects.m */,
 				0D46C40F1814BB4A007B6B7F /* UIFont+Additions.h */,
 				0D46C4101814BB4A007B6B7F /* UIFont+Additions.m */,
 				0D2F965C1814F75800511B19 /* UIButton+Additions.h */,
@@ -389,7 +398,6 @@
 			isa = PBXGroup;
 			children = (
 				0DF651B018162ABC004C593E /* InfoPlist.strings */,
-				0DF651B218162ABC004C593E /* MainStoryboard.storyboard */,
 				0DF651BF18162B19004C593E /* LoginViewController.xib */,
 				0DF651C218162B4E004C593E /* CollectionViewCell.xib */,
 				0DF651BC18162B08004C593E /* DetailViewController.xib */,
@@ -470,14 +478,15 @@
 				0D46C3E41814AD23007B6B7F /* trlogo.png in Resources */,
 				0D46C3DD1814AD23007B6B7F /* Icon.png in Resources */,
 				0D46C3DE1814AD23007B6B7F /* Icon@2x.png in Resources */,
+				0DB6F36C181906F400CB2522 /* Default-568h@2x.png in Resources */,
 				0DF651C418162B4E004C593E /* CollectionViewCell.xib in Resources */,
 				0D46C40A1814B778007B6B7F /* smallSet.sqlite in Resources */,
 				0D46C3D11814AD23007B6B7F /* arrow_right.png in Resources */,
-				0D46C4141814D413007B6B7F /* HeroLight.otf in Resources */,
+				0D46C4141814D413007B6B7F /* Hero-Light.otf in Resources */,
 				0D46C3D21814AD23007B6B7F /* bg.png in Resources */,
-				0DF651B518162ABC004C593E /* MainStoryboard.storyboard in Resources */,
 				0D46C4071814B778007B6B7F /* CoreDataGenerator.sqlite in Resources */,
 				0D46C3D91814AD23007B6B7F /* green-btn.png in Resources */,
+				0DB6F36A1818FBF400CB2522 /* beer_glass.png in Resources */,
 				0D46C3DA1814AD23007B6B7F /* green-btn@2x.png in Resources */,
 				0DF651B818162AD9004C593E /* MasterViewController.xib in Resources */,
 				0D46C3DB1814AD23007B6B7F /* Icon-Small.png in Resources */,
@@ -545,6 +554,7 @@
 				0D46C3F41814AD23007B6B7F /* AFNetworkActivityIndicatorManager.m in Sources */,
 				0D46C3F11814AD23007B6B7F /* AFHTTPRequestOperation.m in Sources */,
 				0D46C3EF1814AD23007B6B7F /* SVProgressHUD.m in Sources */,
+				0DB6F3661818F4BA00CB2522 /* UIImage+ImageEffects.m in Sources */,
 				0D46C3C51814AD23007B6B7F /* AppDelegate.m in Sources */,
 				0D98164818179BB000E098F6 /* AlesExpress.xcdatamodeld in Sources */,
 				0D46C3C71814AD23007B6B7F /* DetailViewController.m in Sources */,
@@ -568,14 +578,6 @@
 				0DF651B118162ABC004C593E /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		0DF651B218162ABC004C593E /* MainStoryboard.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				0DF651B318162ABC004C593E /* en */,
-			);
-			name = MainStoryboard.storyboard;
 			sourceTree = "<group>";
 		};
 		0DF651B618162AD9004C593E /* MasterViewController.xib */ = {
@@ -685,6 +687,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DA4866C4599040FBAEE0C8CE /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -707,6 +710,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DA4866C4599040FBAEE0C8CE /* Pods.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
