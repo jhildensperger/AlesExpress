@@ -48,7 +48,7 @@
 
 - (void)customizeUIAppearance {
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSFontAttributeName: [UIFont normalFontOfSize:20]}];
-    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:4.0 forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setTitleVerticalPositionAdjustment:0 forBarMetrics:UIBarMetricsDefault];
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont normalFontOfSize:18]} forState:UIControlStateNormal];
 

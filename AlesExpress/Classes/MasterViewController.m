@@ -2,8 +2,10 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "CollectionViewCell.h"
+#import "CartViewController.h"
+#import "RNGridMenu.h"
 
-@interface MasterViewController ()
+@interface MasterViewController () <RNGridMenuDelegate>
 
 @property (nonatomic) NSMutableArray *filteredData;
 @property (nonatomic) NSString *sortByKey;
@@ -34,9 +36,31 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass(CollectionViewCell.class) bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"BeerCell"];
+    [self filter:@""];
+    
+    [self changeSortSheetWithIndex:0];
+    
+    [self setupView];
+    
+    self.extendedLayoutIncludesOpaqueBars = NO;
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (self.searchBar.text.length) {
+        [self setSearchBarVisible:YES];
+    }
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-
+    
     if (self.loggingInToOrder) {
         [self presentOrderController];
     }
@@ -51,47 +75,19 @@
                             [UIView animateWithDuration:.35 delay:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                                 self.collectionView.alpha = 1;
                                 self.pageLabel.alpha = 1;
-                                self.orderButton.alpha = 1;
+                                self.refineButton.alpha = 1;
                             } completion:nil];
                         }
                     }];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    UINib *cellNib = [UINib nibWithNibName:NSStringFromClass(CollectionViewCell.class) bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"BeerCell"];
-    [self filter:@""];
-    
-    [self changeSortSheetWithIndex:0];
-
-    [self setupView];
-    
-    self.extendedLayoutIncludesOpaqueBars = NO;
-    self.edgesForExtendedLayout = UIRectEdgeNone;
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self setSearchBarVisible:NO];
 }
 
 - (NSString *)title {
     return @"Choose Beer";
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    CGRect searchBarFrame = self.searchBar.frame;
-
-    if (searchBarFrame.origin.y == 0.0) {
-
-        searchBarFrame.origin.y = -44.0;
-        [self.searchBar resignFirstResponder];
-
-        [UIView animateWithDuration:0.25
-                              delay:0.0
-                            options:UIViewAnimationCurveEaseInOut
-                         animations:^{
-                             self.searchBar.frame = searchBarFrame;
-                         } completion:nil];
-    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -117,7 +113,7 @@
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    DetailViewController *detailViewController = [[DetailViewController alloc] initWithBeer:[self.fetchedResultsController objectAtIndexPath:indexPath]];
+    DetailViewController *detailViewController = [[DetailViewController alloc] initWithBeer:self.filteredData[indexPath.row]];
     [self.navigationController pushViewController:detailViewController animated:YES];
     
 }
@@ -181,30 +177,25 @@
 
 #pragma mark UIActionSheetDelegate Methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    NSString *selectedKey;
-    switch (buttonIndex) {
-        case 0: selectedKey = @"name";
-            break;
-        case 1: selectedKey = @"price";
-            break;
-        case 2: selectedKey = @"abv";
-            break;
-        default: //Cancel Button click...Do Nothing
-            break;
+#pragma mark - RNGridMenuDelegate
+
+- (void)gridMenu:(RNGridMenu *)gridMenu willDismissWithSelectedItem:(RNGridMenuItem *)item atIndex:(NSInteger)itemIndex {
+    NSString *selectedKey = [[item.title lowercaseString] stringByReplacingOccurrencesOfString:@"  ▼" withString:@""];
+    selectedKey = [selectedKey stringByReplacingOccurrencesOfString:@"  ▲" withString:@""];
+    
+    if ([item.title isEqualToString:@"Cancel"]) {
+        return;
     }
     
-    if (buttonIndex != 3) {
-        if ([self.sortByKey isEqualToString:selectedKey]) {
-            self.sortAscending = !self.sortAscending;
-        }else {
-            self.sortByKey = selectedKey;
-            self.sortAscending = YES;
-        }
-        
-        [self filter:self.searchBar.text];
-        [self changeSortSheetWithIndex:buttonIndex];
+    if ([self.sortByKey isEqualToString:selectedKey]) {
+        self.sortAscending = !self.sortAscending;
+    } else {
+        self.sortByKey = selectedKey;
+        self.sortAscending = YES;
     }
+    
+    [self filter:self.searchBar.text];
+    [self changeSortSheetWithIndex:itemIndex];
 }
 
 #pragma mark Filter
@@ -275,30 +266,27 @@
         indexString = [NSString stringWithFormat:@"%d",[collectionView numberOfItemsInSection:0] - indexPath.row];
         self.selectedBeerIndex = [collectionView numberOfItemsInSection:0] - indexPath.row - 1;
     }
-    
-    
-    // Looks bad, but the following handles the case when indexString is equal to totalString
+
     self.pageLabel.text = [NSString stringWithFormat:@"%@ of %@ by %@", indexString, totalString, self.sortByKey];
 }
 
 #pragma mark - UIControl setup methods
 
 - (void)changeSortSheetWithIndex:(NSInteger)buttonIndex {
-    NSString *nameTitle = [@"Name  " stringByAppendingString:(buttonIndex == 0 && self.sortAscending) ? @"▼" : @"▲"];
-    NSString *priceTitle = [@"Price  " stringByAppendingString:(buttonIndex == 0 && self.sortAscending) ? @"▼" : @"▲"];
-    NSString *abvTitle = [@"ABV  " stringByAppendingString:(buttonIndex == 0 && self.sortAscending) ? @"▼" : @"▲"];
+    NSString *nameTitle = [@"Name  " stringByAppendingString:(buttonIndex == 0 && self.sortAscending) ? @"▲" : @"▼"];
+    NSString *priceTitle = [@"Price  " stringByAppendingString:(buttonIndex == 1 && self.sortAscending) ? @"▲" : @"▼"];
+    NSString *abvTitle = [@"ABV  " stringByAppendingString:(buttonIndex == 2 && self.sortAscending) ? @"▲" : @"▼"];
    
-    self.sortingTitles = @[nameTitle, priceTitle, abvTitle];
+    self.sortingTitles = @[nameTitle, priceTitle, abvTitle, @"Cancel"];
 }
 
 - (void)setupView {
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Sort" style:UIBarButtonItemStylePlain target:self action:@selector(didTapSortButton)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(didTapSearchButton)];
+    UIBarButtonItem *searchBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(didTapSearchButton)];
+    UIBarButtonItem *cartBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cart5"] style:UIBarButtonItemStylePlain target:self action:@selector(didTapCartButton)];
+    self.navigationItem.rightBarButtonItems = @[cartBarButton, searchBarButton];
     self.pageLabel.font = [UIFont normalFontOfSize:14];
-    self.orderButton.titleLabel.font = [UIFont normalFontOfSize:20.0];
-    self.orderButton.layer.borderColor = [UIColor colorWithWhite:.9 alpha:1].CGColor;
-    self.orderButton.layer.borderWidth = 1;
-    self.orderButton.layer.cornerRadius = 5;
+    
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 #pragma mark - button methods
@@ -329,31 +317,32 @@
                      }];
 }
 
-- (IBAction)orderButtonTapped:(id)sender {
-    NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:kTaskRabbitAccessTokenKey];;
-
-    if (accessToken) {
-        if ((self.selectedBeerIndex < self.filteredData.count) && (self.selectedBeerIndex > -1)) {
-            [self presentOrderController];
-        }
-    } else {
-        [self presentLoginController];
-    }
+- (IBAction)didTapRefineButton:(id)sender {
+    NSArray *options = self.sortingTitles;
+    RNGridMenu *av = [[RNGridMenu alloc] initWithTitles:options];
+    av.delegate = self;
+    av.itemFont = [UIFont normalFontOfSize:22];
+    av.itemSize = CGSizeMake(150, 55);
+    av.highlightColor = [UIColor colorWithWhite:.6 alpha:1];
+    [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
 }
 
 - (void)didTapSearchButton {
     [self setSearchBarVisible:YES];
 }
 
+- (void)didTapCartButton {
+    CartViewController *cartViewController = [[CartViewController alloc] init];
+    [self.navigationController pushViewController:cartViewController animated:YES];
+}
+
 - (void)setSearchBarVisible:(BOOL)isVisible {
-    CGRect searchBarFrame = self.searchBar.frame;
-    
-    if (searchBarFrame.origin.y < 0.0) {
-        searchBarFrame.origin.y = 0.0;
+    [self.navigationController setNavigationBarHidden:isVisible animated:YES];
+    if (isVisible) {
+        self.searchBarBottomContraint.constant = 0;
         [self.searchBar becomeFirstResponder];
-    }
-    else {
-        searchBarFrame.origin.y = -44.0;
+    } else {
+        self.searchBarBottomContraint.constant = -64.0;
         [self.searchBar resignFirstResponder];
     }
     
@@ -361,17 +350,8 @@
                           delay:0.0
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
-                         self.searchBar.frame = searchBarFrame;
+                         [self.view layoutIfNeeded];
                      } completion:nil];
-}
-
-- (void)didTapSortButton {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Sort Beers" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:nil];
-    [self.sortingTitles enumerateObjectsUsingBlock:^(NSString *title, NSUInteger idx, BOOL *stop) {
-        [actionSheet addButtonWithTitle:title];
-    }];
-    
-    [actionSheet showInView:self.view];
 }
 
 @end
