@@ -19,7 +19,7 @@
 @property (nonatomic) NSString *descriptionText;
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSString *url;
-
+@property (nonatomic) NSString *store;
 
 @end
 

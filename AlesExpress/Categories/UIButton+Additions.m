@@ -2,30 +2,11 @@
 #import "UIButton+Additions.h"
 
 @implementation UIButton (Additions)
+@dynamic imageMask;
 
-//- (instancetype)initWithFrame:(CGRect)frame {
-//    if (self = [super initWithFrame:frame]) {
-//        [self addHighlights];
-//    }
-//    return self;
-//}
-//
-//- (void)awakeFromNib {
-//    [super awakeFromNib];
-//    [self addHighlights];
-//}
-//
-- (void)addHighlights {
-    [self addTarget:self action:@selector(highlightBorder) forControlEvents:UIControlEventTouchDown];
-    [self addTarget:self action:@selector(unhighlightBorder) forControlEvents:UIControlEventTouchUpInside];
-}
-
-- (void)unhighlightBorder {
-    self.layer.borderColor = [UIColor darkGrayColor].CGColor;
-}
-
-- (void)highlightBorder {
-    self.layer.borderColor = [[UIColor darkGrayColor] colorWithAlphaComponent:.5].CGColor;
+- (void)setImageMask:(UIColor *)imageMask {
+    UIImage *normalImage = [self imageForState:UIControlStateNormal];
+    [self setImage:[normalImage maskWithColor:imageMask] forState:UIControlStateNormal];
 }
 
 @end

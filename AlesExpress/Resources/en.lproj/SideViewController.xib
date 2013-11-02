@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="4510" systemVersion="13A603" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SideViewController">
+            <connections>
+                <outlet property="tableView" destination="i8z-4T-vEm" id="BxO-Hc-TqT"/>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1" customClass="KGNoiseLinearGradientView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NXe-wU-ZCe">
+                    <rect key="frame" x="0.0" y="64" width="320" height="1"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.49808964416058393" alpha="0.5" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="B9c-pm-HXb"/>
+                        <constraint firstAttribute="width" constant="320" id="R78-ar-kpE"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="i8z-4T-vEm">
+                    <rect key="frame" x="0.0" y="64" width="260" height="460"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" priority="1" constant="460" id="9iQ-7N-JPn"/>
+                        <constraint firstAttribute="width" constant="260" id="KCP-EH-3bm"/>
+                    </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="IkJ-bo-zbM"/>
+                        <outlet property="delegate" destination="-1" id="KKc-6G-flJ"/>
+                    </connections>
+                </tableView>
+                <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ewf-ae-X4z">
+                    <rect key="frame" x="0.0" y="523" width="320" height="1"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.49808964420000001" alpha="0.5" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="2fV-DY-03l"/>
+                        <constraint firstAttribute="width" constant="320" id="o7U-Ns-0OR"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="NXe-wU-ZCe" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="6QR-os-PxS"/>
+                <constraint firstItem="i8z-4T-vEm" firstAttribute="top" secondItem="1" secondAttribute="top" constant="64" id="BPU-uu-CUE"/>
+                <constraint firstAttribute="trailing" secondItem="i8z-4T-vEm" secondAttribute="trailing" constant="60" id="Bl6-ey-7iN"/>
+                <constraint firstAttribute="trailing" secondItem="Ewf-ae-X4z" secondAttribute="trailing" id="CRn-hp-u7N"/>
+                <constraint firstItem="NXe-wU-ZCe" firstAttribute="top" secondItem="1" secondAttribute="top" constant="64" id="OtS-Bb-0AS"/>
+                <constraint firstAttribute="bottom" secondItem="Ewf-ae-X4z" secondAttribute="bottom" constant="44" id="VL0-8c-jbm"/>
+                <constraint firstAttribute="bottom" secondItem="i8z-4T-vEm" secondAttribute="bottom" constant="44" id="Za7-Qe-era"/>
+                <constraint firstAttribute="trailing" secondItem="NXe-wU-ZCe" secondAttribute="trailing" id="aSJ-HW-gfO"/>
+                <constraint firstItem="Ewf-ae-X4z" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="cEC-1a-VtG"/>
+                <constraint firstItem="i8z-4T-vEm" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="xWL-gF-7ly"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>

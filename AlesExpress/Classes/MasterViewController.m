@@ -2,7 +2,9 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 #import "CollectionViewCell.h"
-#import "CartViewController.h"
+
+//Externals
+#import "IIViewDeckController.h"
 #import "RNGridMenu.h"
 
 @interface MasterViewController () <RNGridMenuDelegate>
@@ -76,6 +78,9 @@
                                 self.collectionView.alpha = 1;
                                 self.pageLabel.alpha = 1;
                                 self.refineButton.alpha = 1;
+                                self.cartButton.alpha = 1;
+                                self.menuButton.alpha = 1;
+                                self.searchButton.alpha = 1;
                             } completion:nil];
                         }
                     }];
@@ -87,7 +92,11 @@
 }
 
 - (NSString *)title {
-    return @"Choose Beer";
+    return @"Ales Unlimited";
+}
+
+- (void)viewDeckController:(IIViewDeckController *)viewDeckController applyShadow:(CALayer *)shadowLayer withBounds:(CGRect)rect {
+    shadowLayer.shadowOpacity = 0;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -174,8 +183,6 @@
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     [self setSearchBarVisible:NO];
 }
-
-#pragma mark UIActionSheetDelegate Methods
 
 #pragma mark - RNGridMenuDelegate
 
@@ -281,12 +288,7 @@
 }
 
 - (void)setupView {
-    UIBarButtonItem *searchBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(didTapSearchButton)];
-    UIBarButtonItem *cartBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cart5"] style:UIBarButtonItemStylePlain target:self action:@selector(didTapCartButton)];
-    self.navigationItem.rightBarButtonItems = @[cartBarButton, searchBarButton];
     self.pageLabel.font = [UIFont normalFontOfSize:14];
-    
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 #pragma mark - button methods
@@ -327,17 +329,19 @@
     [av showInViewController:self center:CGPointMake(self.view.bounds.size.width/2.f, self.view.bounds.size.height/2.f)];
 }
 
-- (void)didTapSearchButton {
+- (IBAction)didTapMenuButton:(id)sender {
+    [self.viewDeckController toggleLeftViewAnimated:YES];
+}
+
+- (IBAction)didTapSearchButton:(id)sender {
     [self setSearchBarVisible:YES];
 }
 
-- (void)didTapCartButton {
-    CartViewController *cartViewController = [[CartViewController alloc] init];
-    [self.navigationController pushViewController:cartViewController animated:YES];
+- (IBAction)didTapCartButton:(id)sender {
+    [self.viewDeckController toggleRightViewAnimated:YES];
 }
 
 - (void)setSearchBarVisible:(BOOL)isVisible {
-    [self.navigationController setNavigationBarHidden:isVisible animated:YES];
     if (isVisible) {
         self.searchBarBottomContraint.constant = 0;
         [self.searchBar becomeFirstResponder];

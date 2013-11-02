@@ -17,5 +17,6 @@
 @dynamic descriptionText;
 @dynamic name;
 @dynamic url;
+@dynamic store;
 
 @end

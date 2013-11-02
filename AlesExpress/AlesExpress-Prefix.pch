@@ -20,4 +20,5 @@
     #import "UIButton+Additions.h"
     #import "UIImage+ImageEffects.h"
     #import "UIView+Additions.h"
+    #import "UIImage+Additions.h"
 #endif

@@ -1,6 +1,9 @@
 #import "AppDelegate.h"
 #import "MasterViewController.h"
+#import "SideViewController.h"
+#import "CartViewController.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "IIViewDeckController.h"
 
 @implementation AppDelegate
 
@@ -18,7 +21,19 @@
     masterViewController.managedObjectContext = self.managedObjectContext;
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
     
-    self.window.rootViewController = navigationController;
+    [navigationController setNavigationBarHidden:YES animated:NO];
+    
+    SideViewController *sideViewController = [[SideViewController alloc] init];
+    CartViewController *cartViewController = [[CartViewController alloc] init];
+    
+    IIViewDeckController *viewdeckController =  [[IIViewDeckController alloc] initWithCenterViewController:navigationController leftViewController:sideViewController rightViewController:cartViewController];
+    
+    viewdeckController.leftSize = 60;
+    viewdeckController.rightSize = 100;
+    
+    self.window.rootViewController = viewdeckController;
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     return YES;
 }
