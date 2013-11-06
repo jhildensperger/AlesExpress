@@ -289,6 +289,8 @@
 
 - (void)setupView {
     self.pageLabel.font = [UIFont normalFontOfSize:14];
+    self.showsCart = YES;
+    self.cartButton.alpha = 0;
 }
 
 #pragma mark - button methods
@@ -337,16 +339,10 @@
     [self setSearchBarVisible:YES];
 }
 
-- (IBAction)didTapCartButton:(id)sender {
-    [self.viewDeckController toggleRightViewAnimated:YES];
-}
-
 - (void)setSearchBarVisible:(BOOL)isVisible {
     if (isVisible) {
-        self.searchBarBottomContraint.constant = 0;
         [self.searchBar becomeFirstResponder];
     } else {
-        self.searchBarBottomContraint.constant = -64.0;
         [self.searchBar resignFirstResponder];
     }
     
@@ -354,7 +350,10 @@
                           delay:0.0
                         options:UIViewAnimationCurveEaseInOut
                      animations:^{
-                         [self.view layoutIfNeeded];
+                         self.menuButton.alpha = !isVisible;
+                         self.cartButton.alpha = !isVisible;
+                         self.searchBarContainerView.alpha = isVisible;
+                         self.searchBar.alpha = isVisible;
                      } completion:nil];
 }
 

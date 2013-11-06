@@ -1,4 +1,4 @@
-@interface UIView (Additions)
+@interface UIView (ImageEffects)
 
 @property (nonatomic) CGFloat x;
 @property (nonatomic) CGFloat y;

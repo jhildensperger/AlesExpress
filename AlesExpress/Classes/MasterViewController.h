@@ -17,6 +17,5 @@
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 
 @property (nonatomic, weak) IBOutlet UIView *searchBarContainerView;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint *searchBarBottomContraint;
 
 @end

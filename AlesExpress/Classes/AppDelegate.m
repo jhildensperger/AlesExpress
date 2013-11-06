@@ -29,7 +29,7 @@
     IIViewDeckController *viewdeckController =  [[IIViewDeckController alloc] initWithCenterViewController:navigationController leftViewController:sideViewController rightViewController:cartViewController];
     
     viewdeckController.leftSize = 60;
-    viewdeckController.rightSize = 100;
+    viewdeckController.rightSize = 60;
     
     self.window.rootViewController = viewdeckController;
     
