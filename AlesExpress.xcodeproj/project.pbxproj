@@ -55,6 +55,7 @@
 		0D46C4111814BB4A007B6B7F /* UIFont+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D46C4101814BB4A007B6B7F /* UIFont+Additions.m */; };
 		0D46C4141814D413007B6B7F /* Hero-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D46C4121814D413007B6B7F /* Hero-Light.otf */; };
 		0D46C4151814D413007B6B7F /* Hero.otf in Resources */ = {isa = PBXBuildFile; fileRef = 0D46C4131814D413007B6B7F /* Hero.otf */; };
+		0D669AF61839458300CAFD7C /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D669AF51839458300CAFD7C /* Default-568h@2x.png */; };
 		0D9061631816273700C7FE30 /* ales.png in Resources */ = {isa = PBXBuildFile; fileRef = 0D9061621816273700C7FE30 /* ales.png */; };
 		0D93BF2B160FE3AB00CA9C29 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D93BF2A160FE3AB00CA9C29 /* CoreText.framework */; };
 		0DA8399218223E3F006C1C57 /* PrefilledBeers.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0DA8399118223E3F006C1C57 /* PrefilledBeers.sqlite */; };
@@ -68,7 +69,6 @@
 		0DAA983B181F791300CC2358 /* SideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0DAA9839181F791300CC2358 /* SideViewController.xib */; };
 		0DB6F3661818F4BA00CB2522 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DB6F3651818F4BA00CB2522 /* UIImage+ImageEffects.m */; };
 		0DB6F36A1818FBF400CB2522 /* beer_glass.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB6F3691818FBF400CB2522 /* beer_glass.png */; };
-		0DB6F36C181906F400CB2522 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB6F36B181906F400CB2522 /* Default-568h@2x.png */; };
 		0DB6F36E181A0A3000CB2522 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DB6F36D181A0A3000CB2522 /* Icon@2x.png */; };
 		0DBAF070181A466900DEA03E /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0DBAF06F181A466900DEA03E /* menu@2x.png */; };
 		0DF651B418162ABC004C593E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0DF651B018162ABC004C593E /* InfoPlist.strings */; };
@@ -164,6 +164,7 @@
 		0D46C4101814BB4A007B6B7F /* UIFont+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+Additions.m"; sourceTree = "<group>"; };
 		0D46C4121814D413007B6B7F /* Hero-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hero-Light.otf"; sourceTree = "<group>"; };
 		0D46C4131814D413007B6B7F /* Hero.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Hero.otf; sourceTree = "<group>"; };
+		0D669AF51839458300CAFD7C /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0D9061621816273700C7FE30 /* ales.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ales.png; sourceTree = "<group>"; };
 		0D93BF2A160FE3AB00CA9C29 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0DA8399118223E3F006C1C57 /* PrefilledBeers.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = PrefilledBeers.sqlite; sourceTree = "<group>"; };
@@ -181,7 +182,6 @@
 		0DB6F3641818F4BA00CB2522 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		0DB6F3651818F4BA00CB2522 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 		0DB6F3691818FBF400CB2522 /* beer_glass.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = beer_glass.png; sourceTree = "<group>"; };
-		0DB6F36B181906F400CB2522 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		0DB6F36D181A0A3000CB2522 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		0DBAF06F181A466900DEA03E /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
 		0DF651B118162ABC004C593E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = InfoPlist.strings; sourceTree = "<group>"; };
@@ -350,13 +350,13 @@
 				0D46C3861814AD23007B6B7F /* arrow_left.png */,
 				0D46C3871814AD23007B6B7F /* arrow_right.png */,
 				0DBAF06F181A466900DEA03E /* menu@2x.png */,
+				0D669AF51839458300CAFD7C /* Default-568h@2x.png */,
 				0D46C3881814AD23007B6B7F /* bg.png */,
 				0D9061621816273700C7FE30 /* ales.png */,
 				0D46C3891814AD23007B6B7F /* bg_wood_spotlight2.png */,
 				0D46C38F1814AD23007B6B7F /* green-btn.png */,
 				0D46C3901814AD23007B6B7F /* green-btn@2x.png */,
 				0D46C3911814AD23007B6B7F /* Icon-Small.png */,
-				0DB6F36B181906F400CB2522 /* Default-568h@2x.png */,
 				0D46C3921814AD23007B6B7F /* Icon-Small@2x.png */,
 				0D46C3931814AD23007B6B7F /* Icon.png */,
 				0DB6F36D181A0A3000CB2522 /* Icon@2x.png */,
@@ -517,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D46C3E31814AD23007B6B7F /* tr_logo.png in Resources */,
+				0D669AF61839458300CAFD7C /* Default-568h@2x.png in Resources */,
 				0D9061631816273700C7FE30 /* ales.png in Resources */,
 				0DF651B418162ABC004C593E /* InfoPlist.strings in Resources */,
 				0D46C4151814D413007B6B7F /* Hero.otf in Resources */,
@@ -532,7 +533,6 @@
 				0D3A3E501824C84F0018F554 /* back.png in Resources */,
 				0D46C3DD1814AD23007B6B7F /* Icon.png in Resources */,
 				0DBAF070181A466900DEA03E /* menu@2x.png in Resources */,
-				0DB6F36C181906F400CB2522 /* Default-568h@2x.png in Resources */,
 				0DA92E91181A16FC000E08F4 /* cart5@2x.png in Resources */,
 				0DAA983B181F791300CC2358 /* SideViewController.xib in Resources */,
 				0DF651C418162B4E004C593E /* CollectionViewCell.xib in Resources */,
